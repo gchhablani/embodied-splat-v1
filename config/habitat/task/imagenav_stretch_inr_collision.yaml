@@ -1,0 +1,38 @@
+# @package _global_
+
+defaults:
+  - /habitat: habitat_config_base
+  - /habitat/task: imagenav_stretch_inr_collision
+  - /habitat/dataset/pointnav: hm3d_stretch
+  - /habitat/simulator/sensor_setups@habitat.simulator.agents.main_agent: rgbd_agent
+  - _self_
+
+habitat:
+  environment:
+    max_episode_steps: 500
+
+  simulator:
+    turn_angle: 30
+    agents:
+      main_agent:
+        sim_sensors:
+          rgb_sensor:
+            width: 480
+            height: 640
+            hfov: 42
+            position: [0, 1.31, 0]
+            type: HabitatSimRGBSensor
+          depth_sensor:
+            width: 480
+            height: 640
+            hfov: 42
+            min_depth: 0.5
+            max_depth: 5.0
+            position: [0, 1.31, 0]
+            type: HabitatSimDepthSensor
+        height: 1.41
+        radius: 0.3
+        max_climb: 0.2
+    habitat_sim_v0:
+      gpu_device_id: 0
+      allow_sliding: False
