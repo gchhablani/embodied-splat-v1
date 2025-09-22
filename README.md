@@ -23,7 +23,7 @@ This repository accompanies the paper
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/gchhablani/embodied-splat.git
+   git clone https://github.com/gchhablani/embodied-splat-v1.git
    ```
 
 2. **Create the conda environment**
