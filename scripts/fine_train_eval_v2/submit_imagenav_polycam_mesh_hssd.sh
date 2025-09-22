@@ -12,6 +12,7 @@ SCENE_NAMES=("castleberry" "piedmont" "clough_classroom" "grad_lounge")
 SCENE_DATASET="default"
 SIMULATOR_TYPE="CustomSim-v0"
 
+EXCLUDED_NODES=$(cat scripts/excluded_nodes.txt)
 # Path to the sbatch script to be used
 SBATCH_SCRIPT_PATH="./scripts/fine_train_eval_v2/templates/eval_hssd.sh"
 
@@ -31,6 +32,7 @@ for MESH_TYPE in "${MESH_TYPES[@]}"; do
             --nodes 1 \
             --cpus-per-task 10 \
             --ntasks-per-node 1 \
+            --exclude=${EXCLUDED_NODES} \
             --signal=USR1@100 \
             --requeue \
             --partition=overcap \

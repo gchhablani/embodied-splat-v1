@@ -8,6 +8,7 @@ CONFIG_FILE="config/experiments/ddppo_${TASK}_inr_collision_v2.yaml"
 SCENE_DATASET="default"
 SIMULATOR_TYPE="CustomSim-v0"
 
+EXCLUDED_NODES=$(cat scripts/excluded_nodes.txt)
 # Path to the sbatch script to be used
 SBATCH_SCRIPT_PATH="./scripts/eval_v2/templates/eval_hm3d.sh"
 

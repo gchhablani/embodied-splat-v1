@@ -19,8 +19,6 @@ export MAGNUM_LOG=quiet
 MAIN_ADDR=$(scontrol show hostnames "${SLURM_JOB_NODELIST}" | head -n 1)
 export MAIN_ADDR
 
-source /srv/flash1/gchhablani3/miniforge3/etc/profile.d/conda.sh
-conda deactivate
 conda activate embodied_splat
 
 WB_ENTITY="gchhablani3-gt"
@@ -60,7 +58,6 @@ srun python -um embodied_splat.run \
 
 
 # CHECKPOINT_DIR="data/new_checkpoints_v2/${TASK}/${MAIN_DATASET}/ddppo_imagenav/vc1/exp_inr_collision/steps_1000/seed_100/1200_m/ckpt.10.pth"
-
 # # extract the ckpt id from CHECKPOINT_DIR - `ckpt.*.pth`
 # CHECKPOINT_ID=$(echo $CHECKPOINT_DIR | grep -oP 'ckpt\.\K\d+(?=.pth)')
 # TENSORBOARD_DIR="tb/${TASK}/${MAIN_DATASET}/ddppo_imagenav/vc1/exp_inr_collision/steps_1000/seed_100/1200_m/eval_ckpt_${CHECKPOINT_ID}"

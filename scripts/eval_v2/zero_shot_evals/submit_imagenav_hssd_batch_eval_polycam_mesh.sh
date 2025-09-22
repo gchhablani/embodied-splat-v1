@@ -5,6 +5,7 @@ MAIN_DATASET="hssd-hab"
 CONFIG_FILE="config/experiments/ddppo_${TASK}_hssd_inr_collision_v2.yaml"
 SIMULATOR_TYPE="CustomSim-v0"
 
+EXCLUDED_NODES=$(cat scripts/excluded_nodes.txt)
 # Path to the sbatch script to be used
 SBATCH_SCRIPT_PATH="./scripts/eval_v2/templates/eval_hssd_single_ckpt.sh"
 
@@ -41,6 +42,7 @@ do
             --nodes 1 \
             --cpus-per-task 10 \
             --ntasks-per-node 1 \
+            --exclude=${EXCLUDED_NODES} \
             --signal=USR1@100 \
             --requeue \
             --partition=overcap \

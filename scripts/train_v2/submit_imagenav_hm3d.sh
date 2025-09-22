@@ -10,6 +10,7 @@ MESH_TYPE=null
 SCENE_DATASET="default"
 SIMULATOR_TYPE="CustomSim-v0"
 NUM_CHECKPOINTS=400
+EXCLUDED_NODES=$(cat scripts/excluded_nodes.txt)
 
 SBATCH_SCRIPT_PATH="./scripts/train_v2/templates/train_hm3d.sh"
 

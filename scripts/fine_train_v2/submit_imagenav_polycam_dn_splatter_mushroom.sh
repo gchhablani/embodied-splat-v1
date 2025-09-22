@@ -10,6 +10,7 @@ SCENE_DATASET="data/scene_datasets/mushroom/dn_splatter/mushroom_dn_splatter.sce
 
 SIMULATOR_TYPE="CustomSim-v0"
 NUM_CHECKPOINTS=21
+EXCLUDED_NODES=$(cat scripts/excluded_nodes.txt)
 
 SBATCH_SCRIPT_PATH="./scripts/fine_train_v2/templates/train.sh"
 
@@ -26,9 +27,11 @@ for MESH_TYPE in "${MESH_TYPES[@]}"; do
             --nodes 2 \
             --cpus-per-task 16 \
             --ntasks-per-node 8 \
+            --exclude=${EXCLUDED_NODES} \
             --signal=USR1@100 \
             --requeue \
-            --partition=overcap \
+            --partition=kira-lab \
+            --qos=short \
             --export=ALL,TASK=${TASK},MAIN_DATASET=${MAIN_DATASET},MESH_TYPE=${MESH_TYPE},SCENE_NAME=${SCENE_NAME},DATA_PATH=${DATA_PATH},SCENES_DIR=${SCENES_DIR},CONFIG_FILE=${CONFIG_FILE},CONTENT_SCENES=${CONTENT_SCENES},TOTAL_NUM_STEPS=${TOTAL_NUM_STEPS},SCENE_DATASET=${SCENE_DATASET},SIMULATOR_TYPE=${SIMULATOR_TYPE},NUM_CHECKPOINTS=${NUM_CHECKPOINTS} \
             --job-name="$updated_job_name" \
             "$SBATCH_SCRIPT_PATH"

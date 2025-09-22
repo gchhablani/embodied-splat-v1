@@ -11,6 +11,7 @@ SCENE_NAMES=("castleberry" "piedmont" "grad_lounge" "clough_classroom")
 SCENE_DATASET="data/scene_datasets/polycam_data/dn_splatter/polycam_data_dn_splatter.scene_dataset_config.json"
 SIMULATOR_TYPE="CustomSim-v0"
 
+EXCLUDED_NODES=$(cat scripts/excluded_nodes.txt)
 SBATCH_SCRIPT_PATH="./scripts/eval_v2/templates/cross_evals/eval_hssd_mesh.sh"
 
 for MESH_TYPE in "${MESH_TYPES[@]}"; do
@@ -29,6 +30,7 @@ for MESH_TYPE in "${MESH_TYPES[@]}"; do
             --nodes 1 \
             --cpus-per-task 10 \
             --ntasks-per-node 1 \
+            --exclude=${EXCLUDED_NODES} \
             --signal=USR1@100 \
             --requeue \
             --partition=overcap \

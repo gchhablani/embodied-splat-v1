@@ -5,12 +5,12 @@ DATA_PATH="data/datasets/pointnav/pointnav_mushroom_dn_splatter/v0.5"
 CONFIG_FILE="config/experiments/finetune_ddppo_${TASK}_inr_collision_v2.yaml"
 TOTAL_NUM_STEPS=2e7
 MESH_TYPES=("dn_splatter")
-# SCENE_NAMES=("sauna" "activity" "honka")
-SCENE_NAMES=("honka")
+SCENE_NAMES=("sauna" "activity" "honka")
 SCENE_DATASET="data/scene_datasets/mushroom/dn_splatter/mushroom_dn_splatter.scene_dataset_config.json"
 
 SIMULATOR_TYPE="CustomSim-v0"
 NUM_CHECKPOINTS=21
+EXCLUDED_NODES=$(cat scripts/excluded_nodes.txt)
 
 SBATCH_SCRIPT_PATH="./scripts/fine_train_v2/templates/train_hssd.sh"
 
@@ -27,6 +27,7 @@ for MESH_TYPE in "${MESH_TYPES[@]}"; do
             --nodes 2 \
             --cpus-per-task 16 \
             --ntasks-per-node 8 \
+            --exclude=${EXCLUDED_NODES} \
             --signal=USR1@100 \
             --requeue \
             --partition=overcap \
