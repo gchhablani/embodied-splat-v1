@@ -1,7 +1,7 @@
 # EmbodiedSplat: Personalized Real-to-Sim-to-Real Navigation with Gaussian Splats from a Mobile Device
 
 This repository accompanies the paper  
-[**EmbodiedSplat: Personalized Real-to-Sim-to-Real Navigation with Gaussian Splats from a Mobile Device**](https://gchhablani.github.io/embodied-splat-web), accepted at **ICCV 2025**.
+[**EmbodiedSplat: Personalized Real-to-Sim-to-Real Navigation with Gaussian Splats from a Mobile Device**](https://gchhablani.github.io/embodied-splat), accepted at **ICCV 2025**.
 
 ---
 
