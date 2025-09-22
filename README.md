@@ -1,237 +1,189 @@
 # EmbodiedSplat: Personalized Real-to-Sim-to-Real Navigation with Gaussian Splats from a Mobile Device
 
-Repository for the paper [EmbodiedSplat: Personalized Real-to-Sim-to-Real Navigation with Gaussian Splats from a Mobile Device](https://gchhablani.github.io/embodied-splat-web).
+This repository accompanies the paper  
+[**EmbodiedSplat: Personalized Real-to-Sim-to-Real Navigation with Gaussian Splats from a Mobile Device**](https://gchhablani.github.io/embodied-splat-web), accepted at **ICCV 2025**.
 
-This repository contains code corresponding to the paper accepted at ICCV 2025.
+---
 
-**Disclaimer**: Please note that using a different kind (or version) of mesh reconstruction strategies may lead to different results than those reported in the paper.
+## 📌 Notes
 
-Note that the names for the scenes in this repository differ from the names in the paper. This is because the names were changed to anonymize the scenes for the review process.
+- **Mesh reconstruction disclaimer**: Results may vary if different mesh reconstruction strategies (or versions) are used compared to those in the paper.  
+- **Scene naming**: Scene names in this repository differ from the paper due to anonymization during review. Mapping is as follows:
 
-The mapping is as follows:
+  - `lounge` → `grad_lounge`  
+  - `classroom` → `clough_classroom`  
+  - `conf_a` → `piedmont`  
+  - `conf_b` → `castleberry`  
+  - `conf_c` → `coda_conference_room`
 
-- `lounge` -> `grad_lounge`
-- `classroom` -> `clough_classroom`
-- `conf_a` -> `piedmont`
-- `conf_b` -> `castleberry`
-- `conf_c` -> `coda_conference_room`
+---
 
-## Setup Instructions
+## ⚙️ Setup
 
-1. Clone the repository:
+1. **Clone the repository**
 
    ```bash
    git clone https://github.com/gchhablani/embodied-splat.git
    ```
 
-2. Create the conda environment from the provided YAML file:
+2. **Create the conda environment**
 
    ```bash
    conda env create -f embodied_splat.yml
    ```
 
-3. Install Habitat-Lab and Habitat-Sim. We use Habitat-Sim version `0.3.1` and Habitat-Lab version `0.3.1`. Please follow the instructions in the [Habitat-Lab repository](https://github.com/facebookresearch/habitat-lab) for installation. For habitat-sim, we recommend using the conda installation, while for habitat-lab, we recommend installing from source. Install both `habitat-lab` and `habitat-baselines` in editable mode.
+3. **Install Habitat-Lab and Habitat-Sim**  
+   - Habitat-Sim: version `0.3.1` (recommend **conda install**)  
+   - Habitat-Lab: version `0.3.1` (recommend **source install**)  
+   - Install both `habitat-lab` and `habitat-baselines` in editable mode.  
+   See [Habitat-Lab installation guide](https://github.com/facebookresearch/habitat-lab).
 
-4. Install the `embodied_splat` package in editable mode:
+4. **Install EmbodiedSplat in editable mode**
 
    ```bash
    pip install -e .
    ```
 
-5. Download the data and checkpoints using the provided script:
+5. **Download data and checkpoints**
 
    ```bash
    ./download_data_and_ckpts.sh
    ```
 
-   Specifically, this will download the following datasets:
-   - MuSHRoom scenes with DN-Splatter meshes
-   - Polycam scenes with DN-Splatter meshes
-   - Polycam scenes with Polycam meshes
+   This script downloads:
+   - MuSHRoom scenes with DN-Splatter meshes  
+   - Polycam scenes with DN-Splatter and Polycam meshes  
+   - Episode datasets (MuSHRoom, Polycam, HM3D, HSSD)  
+   - Pre-trained model checkpoints  
 
-   It will also download the episode datasets for the above, and also the episode datasets for HM3D and HSSD used for pre-training.
-   Finally, it will download the pre-trained checkpoints for the models used in the paper.
+   ⚠️ For HM3D and HSSD scenes, follow the official [Habitat-Lab dataset instructions](https://github.com/facebookresearch/habitat-lab/blob/main/DATASETS.md).
 
-   For downloading the HM3D and HSSD scenes, please following instructions from the official [Habitat-Lab](https://github.com/facebookresearch/habitat-lab/blob/main/DATASETS.md) repository.
-
-6. Activate the conda environment:
+6. **Activate the environment**
 
    ```bash
    conda activate embodied_splat
    ```
 
-7. Replace the Weights & Biases username and project across the script of choice. Currently, they are set as follows:
+7. **Configure logging**  
+   Replace default Weights & Biases config in scripts:
 
    ```bash
    WB_ENTITY="user"
    PROJECT_NAME="embodied_splat"
    ```
 
-   You may need to create a weights & biases account if you don't have one already, and log in using the CLI. You may also choose to use tensorboard, but this will require modifying the template scripts.
-   Please create an issue if you need help with this step.
+   - Requires a [Weights & Biases](https://wandb.ai) account and CLI login.  
+   - Alternatively, you may switch to TensorBoard (requires script edits).  
+   - Create an issue if you need help.
 
-8. Run any of the training scripts to ensure everything is set up correctly.
-    **You may have to modify or create your own scripts based on your cluster setup**. The scripts are written for a SLURM-based cluster with specific GPU types and memory requirements. You can find the scripts in the `scripts/` directory.
+8. **Test the installation**  
+   Run a sample training script (adapt as needed for your cluster). Scripts are designed for **SLURM clusters** with specific GPU/memory settings.  
 
-    ```bash
-    ./scripts/train_v2/submit_imagenav_mushroom_dn_splatter.sh
-    ```
+   ```bash
+   ./scripts/train_v2/submit_imagenav_mushroom_dn_splatter.sh
+   ```
 
-## Scene Reconstruction
+---
 
-The scene reconstructions used in this paper are built using the [DN-Splatter](https://github.com/maturk/dn-splatter) repository. Note that at the time of this writing, the repository has evolved and updated.
-For reference, we use the following version of the repository (with some added depth and normal encoders): <https://github.com/gchhablani/dn-splatter/tree/embodied_splat>.
-Please create an issue on either of these repositories in case you have trouble setting or running the mesh recontrsuction, or if something is missing from this fork.
+## 🏗️ Scene Reconstruction
 
-## Training
+Reconstruction is performed with [**DN-Splatter**](https://github.com/maturk/dn-splatter).  
+For reproducibility, we used this fork with added depth/normal encoders:  
+<https://github.com/gchhablani/dn-splatter/tree/embodied_splat>.  
 
-### Pre-training on HM3D and HSSD
+If you encounter issues with reconstruction, please open an issue in either repository.
 
-#### HM3D
+---
 
-```bash
-./scripts/train_v2/submit_imagenav_hm3d.sh
-```
+## 🏋️ Training
 
-#### HSSD
+### Pre-training
 
-```bash
-./scripts/train_v2/submit_imagenav_hssd_high_lr.sh
-```
+- **HM3D**
 
-### Fine-tuning on MuSHRoom scenes
+  ```bash
+  ./scripts/train_v2/submit_imagenav_hm3d.sh
+  ```
 
-#### HM3D on DN-Splatter Meshes
+- **HSSD**
 
-```bash
-./scripts/fine_train_v2/submit_imagenav_polycam_dn_splatter_mushroom.sh
-./scripts/fine_train_v2/submit_imagenav_polycam_dn_splatter_mushroom_v2.sh # for more scenes
-```
+  ```bash
+  ./scripts/train_v2/submit_imagenav_hssd_high_lr.sh
+  ```
 
-#### HSSD on DN-Splatter Meshes
+### Fine-tuning on MuSHRoom
 
-```bash
-./scripts/fine_train_v2/submit_imagenav_polycam_dn_splatter_mushroom_hssd.sh
-```
+- **HM3D (DN-Splatter meshes)**
 
-### Fine-tuning on Polycam scenes
+  ```bash
+  ./scripts/fine_train_v2/submit_imagenav_polycam_dn_splatter_mushroom.sh
+  ./scripts/fine_train_v2/submit_imagenav_polycam_dn_splatter_mushroom_v2.sh
+  ```
 
-#### HM3D on DN-Splatter Meshes
+- **HSSD (DN-Splatter meshes)**
 
-```bash
-./scripts/fine_train_v2/submit_imagenav_polycam_dn_splatter.sh
-./scripts/fine_train_v2/submit_imagenav_polycam_dn_splatter_2.sh # for more scenes
-```
+  ```bash
+  ./scripts/fine_train_v2/submit_imagenav_polycam_dn_splatter_mushroom_hssd.sh
+  ```
 
-#### HM3D on Polycam Meshes
+### Fine-tuning on Polycam
 
-```bash
-./scripts/fine_train_v2/submit_imagenav_polycam_mesh.sh
-./scripts/fine_train_v2/submit_imagenav_polycam_mesh_2.sh # for more scenes
-```
+- **HM3D (DN-Splatter meshes)**
 
-#### HSSD on DN-Splatter Meshes
+  ```bash
+  ./scripts/fine_train_v2/submit_imagenav_polycam_dn_splatter.sh
+  ./scripts/fine_train_v2/submit_imagenav_polycam_dn_splatter_2.sh
+  ```
 
-```bash
-./scripts/fine_train_v2/submit_imagenav_polycam_dn_splatter_hssd.sh
-```
+- **HM3D (Polycam meshes)**
 
-#### HSSD on Polycam Meshes
+  ```bash
+  ./scripts/fine_train_v2/submit_imagenav_polycam_mesh.sh
+  ./scripts/fine_train_v2/submit_imagenav_polycam_mesh_2.sh
+  ```
 
-```bash
-./scripts/fine_train_v2/submit_imagenav_polycam_mesh_hssd.sh
-```
+- **HSSD (DN-Splatter & Polycam meshes)**  
+  Scripts available in `fine_train_v2/`.
 
-## Evaluation
+---
 
-### Zero-shot evaluation of HM3D and HSSD pre-trained models
+## 📊 Evaluation
 
-#### HM3D on individual Polycam DN-Splatter Meshes
+### Zero-shot Evaluation
 
-```bash
-./scripts/eval_v2/cross_evals/submit_hm3d_on_dn_splatter.sh
-./scripts/eval_v2/cross_evals/submit_hm3d_on_dn_splatter_2.sh # for more scenes
-```
+- HM3D / HSSD on Polycam and MuSHRoom (DN-Splatter + Polycam meshes)  
+  Example:
 
-#### HM3D on individual Polycam Meshes
+  ```bash
+  ./scripts/eval_v2/cross_evals/submit_hm3d_on_dn_splatter.sh
+  ```
 
-```bash
-./scripts/eval_v2/cross_evals/submit_hm3d_on_polycam
-./scripts/eval_v2/cross_evals/submit_hm3d_on_polycam_2.sh # for more scenes
-```
+### Fine-tuned Model Evaluation
 
-#### HM3D on MuSHRoom DN-Splatter Meshes
+- Scripts in `fine_train_eval_v2/` for HM3D/HSSD across MuSHRoom and Polycam meshes.
+Example:
 
-```bash
-./scripts/eval_v2/zero_shot_evals/submit_hm3d_on_dn_splatter_mushroom.sh
-./scripts/eval_v2/zero_shot_evals/submit_hm3d_on_dn_splatter_mushroom_v2.sh # for more scenes
-```
+  ```bash
+  ./scripts/fine_train_eval_v2/submit_imagenav_polycam_dn_splatter_mushroom.sh
+  ```
 
-#### HSSD on individual Polycam DN-Splatter Meshes
+## Miscellaneous
 
-```bash
-./scripts/eval_v2/cross_evals/submit_hssd_on_dn_splatter.sh
-```
+- Ablations, overfitting tests, and intermediate evaluations are in `scripts/`.
+- Example: `eval_v2/zero_shot_evals/` for step-wise evaluation of pre-trained models on different types of meshes (averaged).  
+- `scripts/data` contains the scripts to generate the PointNav datasets.
+- Some evaluation scripts with the name ending with `hm3d_on_hm3d` and `hssd_on_hssd` are for evaluating fine-tuned models on different meshes on their respective pre-training evaluation sets to see how well they perform on the original datasets.
+- Open an issue if you need guidance for specific scripts.
 
-#### HSSD on individual Polycam Meshes
+---
 
-```bash
-./scripts/eval_v2/cross_evals/submit_hssd_on_polycam_mesh.sh
-./scripts/eval_v2/cross_evals/submit_hssd_on_polycam_mesh_2.sh # for more scenes
-```
+## 🌍 Real-world Deployment
+We build upon the [home-robot](https://github.com/facebookresearch/home-robot) framework for real-world deployment.
 
-#### HSSD on MuSHRoom DN-Splatter Meshes
+**Details coming soon!**
 
-```bash
-./scripts/eval_v2/zero_shot_evals/submit_hssd_on_dn_splatter_mushroom.sh
-./scripts/eval_v2/zero_shot_evals/submit_hssd_on_dn_splatter_mushroom_v2.sh # for more scenes
-```
+---
 
-### Fine-tuned model evaluation
+## 🙋 Support
 
-#### Fine-tuned HM3D on MuSHRoom DN-Splatter Meshes
-
-```bash
-./scripts/fine_train_eval_v2/submit_imagenav_polycam_dn_splatter_mushroom.sh
-./scripts/fine_train_eval_v2/submit_imagenav_polycam_dn_splatter_mushroom_v2.sh # for more scenes
-```
-
-#### Fine-tuned HSSD on MuSHRoom DN-Splatter Meshes
-
-```bash
-./scripts/fine_train_eval_v2/submit_imagenav_polycam_dn_splatter_mushroom_hssd.sh
-```
-
-#### Fine-tuned HM3D on individual Polycam DN-Splatter Meshes
-
-```bash
-./scripts/fine_train_eval_v2/submit_imagenav_polycam_dn_splatter.sh
-./scripts/fine_train_eval_v2/submit_imagenav_polycam_dn_splatter_2.sh # for more scenes
-```
-
-#### Fine-tuned HSSD on individual Polycam DN-Splatter Meshes
-
-```bash
-./scripts/fine_train_eval_v2/submit_imagenav_polycam_dn_splatter_hssd.sh
-```
-
-#### Fine-tuned HM3D on individual Polycam Meshes
-
-```bash
-./scripts/fine_train_eval_v2/submit_imagenav_polycam_mesh.sh
-./scripts/fine_train_eval_v2/submit_imagenav_polycam_mesh_2.sh # for more scenes
-```
-
-#### Fine-tuned HSSD on individual Polycam Meshes
-
-```bash
-./scripts/fine_train_eval_v2/submit_imagenav_polycam_mesh_hssd.sh
-```
-
-### Other Miscenallaneous Training and Evaluation scripts
-
-There are other scripts for training and evaluation in the `scripts/` directory. Please refer to the script parameters to understand the purpose of scripts. These scripts were used for ablation studies and other experiments. For example `./scripts/eval_v2/zero_shot_evals/` contains scripts to run average performance across different training steps for HM3D and HSSD pre-training. Similarly, `./scripts/data` contains scripts to create the PointNav episodes. There are scripts which evaluate post fine-tuning performance on the HM3D and HSSD validation sets to ensure that the performance does not deteriorate. There are also scripts with `of` in the names used for overfitting evals on single scenes, and scripts in `train_v2` which deal with overfitting. For brevity of this README, we do not list all of them here. Please create an issue if you need help with any of these scripts.
-
-## Real-world deployment
-
-**Coming soon!**
+If you encounter issues, please open a GitHub issue in this repository.
