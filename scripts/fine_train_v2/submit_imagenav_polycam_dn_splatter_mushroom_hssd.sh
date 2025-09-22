@@ -5,8 +5,7 @@ DATA_PATH="data/datasets/pointnav/pointnav_mushroom_dn_splatter/v0.5"
 CONFIG_FILE="config/experiments/finetune_ddppo_${TASK}_inr_collision_v2.yaml"
 TOTAL_NUM_STEPS=2e7
 MESH_TYPES=("dn_splatter")
-# SCENE_NAMES=("sauna" "activity" "honka")
-SCENE_NAMES=("honka")
+SCENE_NAMES=("sauna" "activity" "honka")
 SCENE_DATASET="data/scene_datasets/mushroom/dn_splatter/mushroom_dn_splatter.scene_dataset_config.json"
 
 SIMULATOR_TYPE="CustomSim-v0"

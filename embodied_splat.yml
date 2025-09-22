@@ -292,4 +292,4 @@ dependencies:
       - wcwidth==0.2.13
       - webdataset==0.1.40
       - werkzeug==3.0.4
-prefix: /srv/flash1/gchhablani3/miniforge3/envs/mesh_nav
+prefix: ./envs/embodied_splat

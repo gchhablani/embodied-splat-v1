@@ -6,7 +6,6 @@
 #SBATCH --nodes 1
 #SBATCH --cpus-per-task 10
 #SBATCH --ntasks-per-node 1
-#SBATCH --exclude=xaea-12,nestor,shakey,dave,megabot,omgwth
 #SBATCH --signal=USR1@100
 #SBATCH --requeue
 #SBATCH --partition=kira-lab
@@ -19,12 +18,10 @@ export MAGNUM_LOG=quiet
 MAIN_ADDR=$(scontrol show hostnames "${SLURM_JOB_NODELIST}" | head -n 1)
 export MAIN_ADDR
 
-source /srv/flash1/gchhablani3/miniforge3/etc/profile.d/conda.sh
-conda deactivate
 conda activate embodied_splat
 
-WB_ENTITY="gchhablani3-gt"
-PROJECT_NAME="3dgs"
+WB_ENTITY="user"
+PROJECT_NAME="embodied_splat"
 
 if [ -z "${NUM_ENVIRONMENTS}" ]; then
   NUM_ENVIRONMENTS=20
@@ -60,7 +57,6 @@ srun python -um embodied_splat.run \
 
 
 # CHECKPOINT_DIR="data/new_checkpoints_v2/${TASK}/${MAIN_DATASET}/ddppo_imagenav/vc1/exp_inr_collision/steps_1000/seed_100/1200_m/ckpt.10.pth"
-
 # # extract the ckpt id from CHECKPOINT_DIR - `ckpt.*.pth`
 # CHECKPOINT_ID=$(echo $CHECKPOINT_DIR | grep -oP 'ckpt\.\K\d+(?=.pth)')
 # TENSORBOARD_DIR="tb/${TASK}/${MAIN_DATASET}/ddppo_imagenav/vc1/exp_inr_collision/steps_1000/seed_100/1200_m/eval_ckpt_${CHECKPOINT_ID}"

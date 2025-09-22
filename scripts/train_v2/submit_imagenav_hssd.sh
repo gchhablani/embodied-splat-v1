@@ -25,7 +25,6 @@ sbatch --gpus a40:16 \
     --nodes 2 \
     --cpus-per-task 16 \
     --ntasks-per-node 8 \
-    --exclude=${EXCLUDED_NODES} \
     --signal=USR1@100 \
     --requeue \
     --partition=kira-lab \

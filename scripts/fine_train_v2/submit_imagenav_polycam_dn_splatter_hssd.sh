@@ -6,7 +6,6 @@ DATA_PATH="data/datasets/pointnav/pointnav_dn_splatter/v0.5"
 CONFIG_FILE="config/experiments/finetune_ddppo_${TASK}_inr_collision_v2.yaml"
 TOTAL_NUM_STEPS=2e7
 MESH_TYPES=("dn_splatter")
-# SCENE_NAMES=("castleberry" "piedmont" "clough_classroom" "grad_lounge")
 SCENE_NAMES=("castleberry" "piedmont" "clough_classroom" "grad_lounge")
 SCENE_DATASET="data/scene_datasets/polycam_data/dn_splatter/polycam_data_dn_splatter.scene_dataset_config.json"
 SIMULATOR_TYPE="CustomSim-v0"

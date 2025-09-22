@@ -6,7 +6,6 @@
 #SBATCH --nodes 1
 #SBATCH --cpus-per-task 10
 #SBATCH --ntasks-per-node 1
-#SBATCH --exclude=xaea-12,nestor,shakey,dave,megabot,omgwth
 #SBATCH --signal=USR1@100
 #SBATCH --requeue
 #SBATCH --partition=kira-lab
@@ -20,12 +19,10 @@ export HABITAT_ENV_DEBUG=1
 MAIN_ADDR=$(scontrol show hostnames "${SLURM_JOB_NODELIST}" | head -n 1)
 export MAIN_ADDR
 
-source /srv/flash1/gchhablani3/miniforge3/etc/profile.d/conda.sh
-conda deactivate
 conda activate embodied_splat
 
-WB_ENTITY="gchhablani3-gt"
-PROJECT_NAME="3dgs"
+WB_ENTITY="user"
+PROJECT_NAME="embodied_splat"
 
 NUM_ENVIRONMENTS=1
 

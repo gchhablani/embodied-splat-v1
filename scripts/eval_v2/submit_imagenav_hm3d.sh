@@ -24,7 +24,6 @@ sbatch --gpus a40:1 \
     --nodes 1 \
     --cpus-per-task 10 \
     --ntasks-per-node 1 \
-    --exclude=${EXCLUDED_NODES} \
     --signal=USR1@100 \
     --requeue \
     --partition=overcap \

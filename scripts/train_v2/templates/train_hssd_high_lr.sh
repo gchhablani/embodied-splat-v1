@@ -5,7 +5,6 @@
 #SBATCH --gpus a40:16
 #SBATCH --cpus-per-task 10
 #SBATCH --ntasks-per-node 16
-#SBATCH --exclude=xaea-12,nestor,shakey,dave,megabot,omgwth
 #SBATCH --signal=USR1@100
 #SBATCH --requeue
 #SBATCH --partition=kira-lab
@@ -19,13 +18,11 @@ export MAGNUM_LOG=quiet
 MAIN_ADDR=$(scontrol show hostnames "${SLURM_JOB_NODELIST}" | head -n 1)
 export MAIN_ADDR
 
-source /srv/flash1/gchhablani3/miniforge3/etc/profile.d/conda.sh
-conda deactivate
 conda activate embodied_splat
 
 
-WB_ENTITY="gchhablani3-gt"
-PROJECT_NAME="3dgs"
+WB_ENTITY="user"
+PROJECT_NAME="embodied_splat"
 
 if [[ "${SCENE_NAME}" == "null" && "${MESH_TYPE}" == "null" ]]; then  
   TENSORBOARD_DIR="tb/${TASK}/${MAIN_DATASET}/ddppo_imagenav_high_lr/vc1/exp_inr_collision/steps_1000/seed_100/1200_m"

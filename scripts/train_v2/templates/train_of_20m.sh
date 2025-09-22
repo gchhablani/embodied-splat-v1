@@ -5,7 +5,6 @@
 #SBATCH --gpus a40:16
 #SBATCH --cpus-per-task 10
 #SBATCH --ntasks-per-node 16
-#SBATCH --exclude=xaea-12,nestor,shakey,dave,megabot,omgwth
 #SBATCH --signal=USR1@100
 #SBATCH --requeue
 #SBATCH --partition=kira-lab
@@ -14,32 +13,29 @@
 export GLOG_minloglevel=2
 export HABITAT_SIM_LOG=quiet
 export MAGNUM_LOG=quiet
-# export HABITAT_ENV_DEBUG=1
 
 MAIN_ADDR=$(scontrol show hostnames "${SLURM_JOB_NODELIST}" | head -n 1)
 export MAIN_ADDR
 
-source /srv/flash1/gchhablani3/miniforge3/etc/profile.d/conda.sh
-conda deactivate
 conda activate embodied_splat
 
 
-WB_ENTITY="gchhablani3-gt"
-PROJECT_NAME="3dgs"
+WB_ENTITY="user"
+PROJECT_NAME="embodied_splat"
 
 if [[ "${SCENE_NAME}" == "null" && "${MESH_TYPE}" == "null" ]]; then  
-  TENSORBOARD_DIR="tb/${TASK}/${MAIN_DATASET}/ddppo_imagenav/vc1/exp_inr_collision/steps_1000/seed_100/600_m"
-  CHECKPOINT_DIR="data/new_checkpoints_v2/${TASK}/${MAIN_DATASET}/ddppo_imagenav/vc1/exp_inr_collision/steps_1000/seed_100/600_m"
+  TENSORBOARD_DIR="tb/${TASK}/${MAIN_DATASET}/ddppo_imagenav/vc1/exp_inr_collision/steps_1000/seed_100/of_20_m"
+  CHECKPOINT_DIR="data/new_checkpoints_v2/${TASK}/${MAIN_DATASET}/ddppo_imagenav/vc1/exp_inr_collision/steps_1000/seed_100/of_20_m"
 else
-  TENSORBOARD_DIR="tb/${TASK}/${MAIN_DATASET}/${MESH_TYPE}/${SCENE_NAME}/ddppo_imagenav/vc1/exp_inr_collision/steps_1000/seed_100/600_m"
-  CHECKPOINT_DIR="data/new_checkpoints_v2/${TASK}/${MAIN_DATASET}/${MESH_TYPE}/${SCENE_NAME}/ddppo_imagenav/vc1/exp_inr_collision/steps_1000/seed_100/600_m"
+  TENSORBOARD_DIR="tb/${TASK}/${MAIN_DATASET}/${MESH_TYPE}/${SCENE_NAME}/ddppo_imagenav/vc1/exp_inr_collision/steps_1000/seed_100/of_20_m"
+  CHECKPOINT_DIR="data/new_checkpoints_v2/${TASK}/${MAIN_DATASET}/${MESH_TYPE}/${SCENE_NAME}/ddppo_imagenav/vc1/exp_inr_collision/steps_1000/seed_100/of_20_m"
 fi
 
 srun python -um embodied_splat.run \
   --run-type train \
   --exp-config ${CONFIG_FILE} \
   habitat_baselines.trainer_name="ddppo" \
-  habitat_baselines.num_environments=10 \
+  habitat_baselines.num_environments=8 \
   habitat_baselines.num_updates=-1 \
   habitat.simulator.type=${SIMULATOR_TYPE} \
   habitat.simulator.scene_dataset=${SCENE_DATASET} \
