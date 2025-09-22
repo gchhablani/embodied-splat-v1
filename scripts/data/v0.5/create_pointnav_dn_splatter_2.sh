@@ -5,8 +5,7 @@
 #SBATCH --gpus a40:1
 #SBATCH --nodes 1
 #SBATCH --cpus-per-task 10
-#SBATCH --ntasks-per-node 1
-#SBATCH --exclude=robby,chappie,voltron,xaea-12
+#SBATCH --ntasks-per-node 1,xaea-12
 #SBATCH --signal=USR1@100
 #SBATCH --requeue
 #SBATCH --partition=kira-lab

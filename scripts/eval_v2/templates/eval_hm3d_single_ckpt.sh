@@ -6,7 +6,6 @@
 #SBATCH --nodes 1
 #SBATCH --cpus-per-task 10
 #SBATCH --ntasks-per-node 1
-#SBATCH --exclude=xaea-12,nestor,shakey,dave,megabot,omgwth
 #SBATCH --signal=USR1@100
 #SBATCH --requeue
 #SBATCH --partition=kira-lab
@@ -21,8 +20,8 @@ export MAIN_ADDR
 
 conda activate embodied_splat
 
-WB_ENTITY="gchhablani3-gt"
-PROJECT_NAME="3dgs"
+WB_ENTITY="user"
+PROJECT_NAME="embodied_splat"
 
 if [ -z "${NUM_ENVIRONMENTS}" ]; then
   NUM_ENVIRONMENTS=20

@@ -5,7 +5,6 @@
 #SBATCH --gpus a40:16
 #SBATCH --cpus-per-task 10
 #SBATCH --ntasks-per-node 16
-#SBATCH --exclude=xaea-12,nestor,shakey,dave,megabot,omgwth
 #SBATCH --signal=USR1@100
 #SBATCH --requeue
 #SBATCH --partition=kira-lab
@@ -21,8 +20,8 @@ export MAIN_ADDR
 conda activate embodied_splat
 
 
-WB_ENTITY="gchhablani3-gt"
-PROJECT_NAME="3dgs"
+WB_ENTITY="user"
+PROJECT_NAME="embodied_splat"
 
 if [[ "${SCENE_NAME}" == "null" && "${MESH_TYPE}" == "null" ]]; then  
   TENSORBOARD_DIR="tb/finetune_hm3d_ckpt_204/${TASK}/${MAIN_DATASET}/ddppo_imagenav/vc1/exp_inr_collision/steps_1000/seed_100/20_m"

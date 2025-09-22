@@ -6,7 +6,6 @@
 #SBATCH --nodes 1
 #SBATCH --cpus-per-task 10
 #SBATCH --ntasks-per-node 1
-#SBATCH --exclude=xaea-12,nestor,shakey,dave,megabot,omgwth
 #SBATCH --signal=USR1@100
 #SBATCH --requeue
 #SBATCH --partition=kira-lab
@@ -21,8 +20,8 @@ export MAIN_ADDR
 
 conda activate embodied_splat
 
-WB_ENTITY="gchhablani3-gt"
-PROJECT_NAME="3dgs"
+WB_ENTITY="user"
+PROJECT_NAME="embodied_splat"
 
 CHECKPOINT_DIR="data/new_checkpoints_v2/imagenav/hm3d_semantic_v0.2/ddppo_imagenav/vc1/exp_inr_collision/steps_1000/seed_100/1200_m/ckpt.204.pth"
 if [[ "${SCENE_NAME}" == "null" && "${MESH_TYPE}" == "null" ]]; then  

@@ -5,7 +5,6 @@ MAIN_DATASET="hm3d_semantic_v0.2"
 CONFIG_FILE="config/experiments/ddppo_${TASK}_inr_collision_v2.yaml"
 SIMULATOR_TYPE="CustomSim-v0"
 
-EXCLUDED_NODES=$(cat scripts/excluded_nodes.txt)
 SBATCH_SCRIPT_PATH="./scripts/eval_v2/templates/eval_hm3d_single_ckpt.sh"
 
 SCENES_DIR="data/scene_datasets/polycam_data/dn_splatter/"
@@ -41,7 +40,6 @@ do
             --nodes 1 \
             --cpus-per-task 10 \
             --ntasks-per-node 1 \
-            --exclude=${EXCLUDED_NODES} \
             --signal=USR1@100 \
             --requeue \
             --partition=kira-lab \

@@ -10,7 +10,6 @@ SCENE_NAMES=("sauna" "activity" "honka")
 SCENE_DATASET="data/scene_datasets/mushroom/dn_splatter/mushroom_dn_splatter.scene_dataset_config.json"
 SIMULATOR_TYPE="CustomSim-v0"
 NUM_CHECKPOINTS=100
-EXCLUDED_NODES=$(cat scripts/excluded_nodes.txt)
 
 SBATCH_SCRIPT_PATH="./scripts/train_v2/templates/train_of_20m.sh"
 
@@ -28,7 +27,6 @@ for MESH_TYPE in "${MESH_TYPES[@]}"; do
             --nodes 2 \
             --cpus-per-task 16 \
             --ntasks-per-node 8 \
-            --exclude=${EXCLUDED_NODES} \
             --signal=USR1@100 \
             --requeue \
             --partition=kira-lab \

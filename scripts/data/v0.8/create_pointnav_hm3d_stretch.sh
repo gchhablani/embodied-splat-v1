@@ -6,7 +6,6 @@
 #SBATCH --nodes 1
 #SBATCH --cpus-per-task 10
 #SBATCH --ntasks-per-node 1
-#SBATCH --exclude=robby,chappie,voltron
 #SBATCH --signal=USR1@100
 #SBATCH --requeue
 #SBATCH --partition=overcap
@@ -14,9 +13,7 @@
 MAIN_ADDR=$(scontrol show hostnames "${SLURM_JOB_NODELIST}" | head -n 1)
 export MAIN_ADDR
 
-source /srv/flash1/gchhablani3/miniforge3/etc/profile.d/conda.sh
-conda deactivate
-conda activate mesh_nav_gauss
+conda activate embodied_splat
 
 srun python -u mesh_nav/utils/create_pointnav_stretch.py \
     --scene_dataset hm3d \
