@@ -70,7 +70,6 @@ The mapping is as follows:
    You may need to create a weights & biases account if you don't have one already, and log in using the CLI. You may also choose to use tensorboard, but this will require modifying the template scripts.
    Please create an issue if you need help with this step.
 
-
 8. Run any of the training scripts to ensure everything is set up correctly.
     **You may have to modify or create your own scripts based on your cluster setup**. The scripts are written for a SLURM-based cluster with specific GPU types and memory requirements. You can find the scripts in the `scripts/` directory.
 
