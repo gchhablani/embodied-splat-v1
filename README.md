@@ -95,6 +95,25 @@ If you encounter issues with reconstruction, please open an issue in either repo
 
 ---
 
+## 🔧 Preprocessing
+
+- **HSSD**
+  ```bash
+  ./scripts/data/v0.5/create_pointnav_hssd.sh
+  ```
+- **[MuSHRoom](https://xuqianren.github.io/publications/MuSHRoom/) Dataset**
+  ```bash
+  ./scripts/data/v0.5/create_pointnav_mushroom.sh
+  ```
+- **DN-Splatter meshes**
+  ```bash
+  ./scripts/data/v0.5/create_pointnav_dn_splatter.sh
+  ```
+- **Polycam meshes**
+  ```bash
+  ./scripts/data/v0.5/create_pointnav_polycam_mesh.sh
+  ```
+
 ## 🏋️ Training
 
 ### Pre-training
