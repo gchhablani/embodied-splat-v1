@@ -186,6 +186,37 @@ Example:
   ./scripts/fine_train_eval_v2/submit_imagenav_polycam_dn_splatter_mushroom.sh
   ```
 
+## 📊 Results
+
+We report **fine-tuned model results** on DN-Splatter and Polycam meshes across different scenes.  
+Each value is the **sample mean** across runs, with variance in parentheses.  
+Numbers in **bold** are those reported in the ICCV 2025 paper.
+
+### DN-Splatter Mesh Results
+
+| Scene         | Mean Success (%) | Variance | Paper Result (%) |
+|---------------|------------------|----------|------------------|
+| conf_a        | 98.67            | 0.33     | **99** |
+| lounge        | 93.00            | 7.00     | **95** |
+| classroom     | 96.00            | 1.00     | **96** |
+| conf_b        | 99.00            | 1.00     | **100** |
+
+### Polycam Mesh Results
+
+| Scene         | Mean Success (%) | Variance | Paper Result (%) |
+|---------------|------------------|----------|------------------|
+| conf_a        | 99.33            | 0.33     | **99** |
+| lounge        | 95.25            | 4.25     | **97** |
+| classroom     | 94.25            | 2.25     | **96** |
+| conf_b        | 99.33            | 0.33     | **99** |
+
+---
+
+### 🔍 Notes
+- Variances are higher in **lounge** and **classroom**, likely due to denser object layouts in those scenes.  
+- The means and variances are consistent with the paper’s reported values, confirming reproducibility.  
+- Released Hugging Face checkpoints correspond to the **best-performing model** among 20 saved checkpoints per 20M fine-tuning run.
+
 ## Miscellaneous
 
 - Ablations, overfitting tests, and intermediate evaluations are in `scripts/`.
